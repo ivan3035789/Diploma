@@ -1,10 +1,8 @@
 package androidTest.java.ru.iteco.fmhandroid.ui.data;
 
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.pressBack;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.swipeLeft;
@@ -13,7 +11,6 @@ import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
-import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withChild;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -24,7 +21,6 @@ import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentat
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-
 import static androidTest.java.ru.iteco.fmhandroid.ui.step.MainScreenStep.enterCreateClaimsActionButton;
 import static androidTest.java.ru.iteco.fmhandroid.ui.step.MainScreenStep.enterCreateClaimsAllClaims;
 import static androidTest.java.ru.iteco.fmhandroid.ui.step.MainScreenStep.enterCreateClaimsButtonPlus;
@@ -54,12 +50,10 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
-import org.junit.runners.model.MultipleFailureException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
@@ -78,7 +72,6 @@ import androidTest.java.ru.iteco.fmhandroid.ui.screenElements.NewsScreenElements
 import androidTest.java.ru.iteco.fmhandroid.ui.screenElements.WatchScreenElements;
 import androidTest.java.ru.iteco.fmhandroid.ui.step.ControlPanelScreenStep;
 import androidTest.java.ru.iteco.fmhandroid.ui.step.MainScreenStep;
-import androidTest.java.ru.iteco.fmhandroid.ui.step.NewsScreenStep;
 import io.bloco.faker.Faker;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
@@ -422,7 +415,6 @@ public class Helper {
         }
 
     }
-
 
 
     public static void setUpStatusNewsNotActive(int position) {
