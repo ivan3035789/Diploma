@@ -108,14 +108,12 @@ public class AuthorizationScreenStep {
     }
 
     @Step("Проверка появления предупреждающего сообщения Login and password cannot be empty")
-    @NonNull
-    public void checkingTheLoginAndPasswordCannotBeEmpty(@NonNull AppActivity activity, @NonNull int text) {
+    public void checkingTheLoginAndPasswordCannotBeEmpty(@NonNull AppActivity activity, int text) {
         onView(withId(text)).inRoot(withDecorView(Matchers.not(is(activity.getWindow().getDecorView()))));
     }
 
     @Step("Проверка появления предупреждающего сообщения Wrong login or password")
-    @NonNull
-    public void checkingTheWrongLoginOrPassword(@NonNull AppActivity activity, @NonNull int text) {
+    public void checkingTheWrongLoginOrPassword(@NonNull AppActivity activity, int text) {
         onView(withText(text)).inRoot(withDecorView(Matchers.not(is(activity.getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
 }
