@@ -46,4 +46,4 @@ jobs:
         target: default
         arch: x86
         profile: Pixel 4
-        script: ./gradlew connectedAndroidTest
+        script: ./gradlew connectedAndroidTest --info "headless=true"
