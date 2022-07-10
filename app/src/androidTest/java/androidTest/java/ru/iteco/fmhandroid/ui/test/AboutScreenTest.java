@@ -38,6 +38,7 @@ public class AboutScreenTest {
             mainScreenStep.checkNameMainScreen();
         } catch (NoMatchingViewException e) {
             authorizationScreenStep.validLoginPassword(Helper.authInfo());
+            SystemClock.sleep(5000);
         }
     }
 
@@ -50,18 +51,15 @@ public class AboutScreenTest {
     @DisplayName("Should display information about the version of the application")
     @Description("В этом тест кейсе мы проверяем наличие информации на странице о текущей версии приложения")
     public void ShouldDisplayInformationAboutTheVersionOfTheApplication() {
-        SystemClock.sleep(3000);
         mainScreenStep.clickingOnTheActionMenuButton();
         mainScreenStep.clickingOnTheAboutName();
         aboutScreenStep.checkScreenNameAbout();
-        SystemClock.sleep(3000);
     }
 
     @Test
     @DisplayName("Must follow the link in Privacy Policy")
     @Description("В этом тест кейсе мы проверяем переход пользователя на страницу по ссылке указанной в Privacy Policy (страница About)")
     public void mustFollowTheLinkInPrivacyPolicy() {
-        SystemClock.sleep(3000);
         mainScreenStep.clickingOnTheActionMenuButton();
         mainScreenStep.clickingOnTheAboutName();
         aboutScreenStep.checkNamePrivacyPolicy();
@@ -74,7 +72,6 @@ public class AboutScreenTest {
     @DisplayName("Must follow the link in Terms of use")
     @Description("В этом тест кейсе мы проверяем переход пользователя на страницу по ссылке указанной в Terms of use  (страница About) ")
     public void mustFollowTheLinkInTermsOfUse() {
-        SystemClock.sleep(3000);
         mainScreenStep.clickingOnTheActionMenuButton();
         mainScreenStep.clickingOnTheAboutName();
         aboutScreenStep.checkNameTermsOfUse();
@@ -87,7 +84,6 @@ public class AboutScreenTest {
     @DisplayName("must be the name of the manufacturer")
     @Description("В этом тест кейсе мы проверяем наличие информации на странице о текущей версии приложения")
     public void mustBeTheNameOfTheManufacturer() {
-        SystemClock.sleep(3000);
         mainScreenStep.clickingOnTheActionMenuButton();
         mainScreenStep.clickingOnTheAboutName();
         aboutScreenStep.checkingTheManufacturersName();

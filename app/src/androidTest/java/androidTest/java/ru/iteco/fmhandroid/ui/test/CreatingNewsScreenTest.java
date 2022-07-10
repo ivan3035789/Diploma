@@ -1,13 +1,5 @@
 package androidTest.java.ru.iteco.fmhandroid.ui.test;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.core.IsNot.not;
 import static androidTest.java.ru.iteco.fmhandroid.ui.data.Helper.Text.textSymbol;
 import static androidTest.java.ru.iteco.fmhandroid.ui.data.Helper.authInfo;
 
@@ -84,8 +76,7 @@ public class CreatingNewsScreenTest {
     public void aDropDownListWithCategoriesShouldAppear() {
         creatingNewsScreenStep.clickingOnTheCategoryField();
         SystemClock.sleep(2000);
-        onView(withClassName(is("android.widget.PopupWindow$PopupBackgroundView")))
-                .inRoot(withDecorView(not(is(ActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        creatingNewsScreenStep.checkingTheAppearanceOfTheDropDownList(ActivityTestRule.getActivity());
     }
 
     @Test
@@ -93,8 +84,7 @@ public class CreatingNewsScreenTest {
     @Description("В этом тест кейсе мы проверяем, что при нажатии на поле \"Publication date\" появляется календарь ")
     public void aCalendarShouldAppear() {
         creatingNewsScreenStep.clickingOnTheDateField();
-        onView(withClassName(is("android.widget.DatePicker")))
-                .inRoot(withDecorView(not(is(ActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        creatingNewsScreenStep.checkingTheCalendarAppearance(ActivityTestRule.getActivity());
     }
 
     @Test
@@ -102,8 +92,7 @@ public class CreatingNewsScreenTest {
     @Description("В этом тест кейсе мы проверяем, что при нажатии на поле \"Time\" появляется часы стрелочного типа")
     public void aClockOfTheArrowTypeShouldAppear() {
         creatingNewsScreenStep.clickingOnTheTimeField();
-        onView(withClassName(is("android.widget.RadialTimePickerView")))
-                .inRoot(withDecorView(not(is(ActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        creatingNewsScreenStep.checkingTheAppearanceOfClockOfTheArrowType(ActivityTestRule.getActivity());
     }
 
     @Test
@@ -192,9 +181,7 @@ public class CreatingNewsScreenTest {
     public void aWarningMessageShouldAppearIfTheFieldsAreEmptyWhenYouClickOnTheSaveButton() {
         creatingNewsScreenStep.clickingOnTheSaveNewsButton();
         SystemClock.sleep(2000);
-        onView(withText(R.string.empty_fields))
-                .inRoot(withDecorView(not(is(ActivityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(withText("Fill empty fields")));
+        creatingNewsScreenStep.checkingTheFillEmptyFields(ActivityTestRule.getActivity(), R.string.empty_fields);
     }
 
     @Test
@@ -205,9 +192,7 @@ public class CreatingNewsScreenTest {
 
         creatingNewsScreenStep.fillingInTheCategoryField(text);
         creatingNewsScreenStep.clickingOnTheSaveNewsButton();
-        onView(withText(R.string.error_saving))
-                .inRoot(withDecorView(not(is(ActivityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(withText("Saving failed. Try again later.")));
+        creatingNewsScreenStep.checkingTheSavingFailedTryAgainLater(ActivityTestRule.getActivity(), R.string.error_saving);
     }
 
     @Test
@@ -229,7 +214,7 @@ public class CreatingNewsScreenTest {
             creatingNewsScreenStep.invalidLanguage(invalidLanguageText, invalidLanguageText);
         } catch (RuntimeException expected) {
         } finally {
-            creatingNewsScreenStep.checkingForTheAbsenceOfWordsFromRussianLettersInTheFields(invalidLanguageText);
+            creatingNewsScreenStep.checkingForTheAbsenceOfWordsFromRussianLettersInTheFields();
         }
     }
 }

@@ -1,13 +1,5 @@
 package androidTest.java.ru.iteco.fmhandroid.ui.test;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.core.IsNot.not;
 import static androidTest.java.ru.iteco.fmhandroid.ui.data.Helper.Rand.randomCategory;
 import static androidTest.java.ru.iteco.fmhandroid.ui.data.Helper.Rand.randomClaims;
 import static androidTest.java.ru.iteco.fmhandroid.ui.data.Helper.Rand.randomNews;
@@ -58,7 +50,7 @@ public class EditingNewsScreenTest {
             mainScreenStep.checkNameMainScreen();
         } catch (NoMatchingViewException e) {
             authorizationScreenStep.validLoginPassword(authInfo());
-            SystemClock.sleep(3000);
+            SystemClock.sleep(5000);
         }
     }
 
@@ -67,14 +59,13 @@ public class EditingNewsScreenTest {
         SystemClock.sleep(5000);
     }
 
-    @Test /// добавить в кейсы
+    @Test
     @DisplayName("У экрана должно быть название")
     @Description("В этом тест кейсе мы проверяем название экрана Editing News")
     public void theScreenShouldHaveName() {
         mainScreenStep.switchingToTheControlPanel();
         controlPanelScreenStep.clickingOnTheButtonToGoToTheNewsEditingScreen();
         editingNewsScreenStep.checkingTheNameOfTheEditingNewsScreen();
-
     }
 
     @Test
@@ -112,8 +103,7 @@ public class EditingNewsScreenTest {
         controlPanelScreenStep.clickingOnTheButtonToGoToTheNewsEditingScreen();
         editingNewsScreenStep.clickingOnTheCategoryField();
         SystemClock.sleep(3000);
-        onView(withClassName(is("android.widget.PopupWindow$PopupBackgroundView")))
-                .inRoot(withDecorView(not(is(ActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        editingNewsScreenStep.checkingTheAppearanceOfTheDropDownList(ActivityTestRule.getActivity());
     }
 
     @Test
@@ -123,8 +113,7 @@ public class EditingNewsScreenTest {
         mainScreenStep.switchingToTheControlPanel();
         controlPanelScreenStep.clickingOnTheButtonToGoToTheNewsEditingScreen();
         editingNewsScreenStep.clickingOnThePublicationDateField();
-        onView(withClassName(is("android.widget.DatePicker")))
-                .inRoot(withDecorView(not(is(ActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        editingNewsScreenStep.checkingTheCalendarAppearance(ActivityTestRule.getActivity());
     }
 
     @Test
@@ -134,8 +123,7 @@ public class EditingNewsScreenTest {
         mainScreenStep.switchingToTheControlPanel();
         controlPanelScreenStep.clickingOnTheButtonToGoToTheNewsEditingScreen();
         editingNewsScreenStep.clickingOnTheTimeField();
-        onView(withClassName(is("android.widget.RadialTimePickerView")))
-                .inRoot(withDecorView(not(is(ActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        editingNewsScreenStep.checkingTheAppearanceOfClockOfTheArrowType(ActivityTestRule.getActivity());
     }
 
     @Test
@@ -246,9 +234,7 @@ public class EditingNewsScreenTest {
         controlPanelScreenStep.clickingOnTheButtonToGoToTheNewsEditingScreen();
         editingNewsScreenStep.deletingTheNewsTitle();
         editingNewsScreenStep.clickingOnTheSaveButton();
-        onView(withText(R.string.empty_fields))
-                .inRoot(withDecorView(not(is(ActivityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(withText("Fill empty fields")));
+        editingNewsScreenStep.checkingTheFillEmptyFields(ActivityTestRule.getActivity(), R.string.empty_fields);
     }
 
     @Test
@@ -262,22 +248,8 @@ public class EditingNewsScreenTest {
         editingNewsScreenStep.enteringTextInTheCategoryField(text);
         SystemClock.sleep(2000);
         editingNewsScreenStep.clickingOnTheSaveButton();
-        onView(withText(R.string.error_saving))
-                .inRoot(withDecorView(not(is(ActivityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(withText("Saving failed. Try again later.")));
+        editingNewsScreenStep.checkingTheSavingFailedTryAgainLater(ActivityTestRule.getActivity(), R.string.error_saving);
     }
-
-//    @Test
-//    @DisplayName("Icons should appear exclamation mark in a circle of red color")
-//    @Description("В этом тест кейсе мы проверяем, что в незаполненных  поле, полях, появляется красный восклецательный знак в круге  цвета красного цвета после нажатия на кнопку \"SAVE\" ")
-//    public void iconsShouldAppearExclamationMarkInCircleOfRedColor() {
-//        mainScreenStep.switchingToTheControlPanel();
-//        controlPanelScreenStep.clickingOnTheButtonToGoToTheNewsEditingScreen();
-//        editingNewsScreenStep.deletingTheNewsTitle();
-//        SystemClock.sleep(2000);
-//        editingNewsScreenStep.clickingOnTheSaveButton();
-//        //доделать
-//    }
 
     @Test
     @DisplayName("The fields must be filled in with English letters")
