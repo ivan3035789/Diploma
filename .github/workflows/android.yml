@@ -26,7 +26,7 @@ jobs:
       run: ./gradlew build
       
   test:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
     - name: set up JDK 11
@@ -43,11 +43,12 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
+        script: ./gradlew connectedAndroidTest
 #         target: default
 #         arch: x86
 #         profile: Pixel 4
 #         script: ./gradlew connectedCheck --stacktrace
-        script: ./gradlew connectedAndroidTest
+#         script: ./gradlew connectedAndroidTest
     - name: Android Test Report
       uses: asadmansr/android-test-report-action@v1.2.0
       if: ${{ always() }}
