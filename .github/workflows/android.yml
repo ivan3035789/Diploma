@@ -42,6 +42,9 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
+          target: default
+          arch: x86
+          profile: Pixel 4
           script: ./gradlew connectedAndroidTest
       - name: Android Test Report
         uses: asadmansr/android-test-report-action@v1.2.0
