@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest 
+    runs-on: ubuntu-latest 
 
     steps:
     - uses: actions/checkout@v2
@@ -46,6 +46,9 @@ jobs:
           arch: x86
           profile: Pixel 4
           script: ./gradlew connectedAndroidTest
+  android_Report:
+    runs-on: ubuntu-latest 
+    steps:
       - name: Android Test Report
         uses: asadmansr/android-test-report-action@v1.2.0
         if: ${{ always() }}    
